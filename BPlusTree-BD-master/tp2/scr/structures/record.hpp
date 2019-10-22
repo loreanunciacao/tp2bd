@@ -1,10 +1,10 @@
 #ifndef RECORD_CLASS
 #define RECORD_CLASS
 
-#define MAX_TITULO 300
-#define MAX_AUTORES 150
-#define MAX_ATUALIZACOES 20
-#define MAX_SNIPPET 1024
+#define TITULO_SIZE 300
+#define AUTORES_SIZE 150
+#define ATUALIZACOES_SIZE 20
+#define SNIPPET_SIZE 1024
 
 #include <iostream>
 #include <cstring>
@@ -13,23 +13,23 @@ using namespace std;
 class Record{
     public:        
         int id;
-        char titulo[MAX_TITULO];
+        char titulo[TITULO_SIZE];
         int ano;
-        char autores[MAX_AUTORES];
+        char autores[AUTORES_SIZE];
         int citacoes;
-        char atualizacoes[MAX_ATUALIZACOES];  //XX-XX-XXXX XX:XX:XX
-        char snippet[MAX_SNIPPET];
+        char atualizacoes[ATUALIZACOES_SIZE];  //XX-XX-XXXX XX:XX:XX
+        char snippet[SNIPPET_SIZE];
 
-        Record(int id, char titulo[MAX_TITULO], int ano, char autores[MAX_AUTORES], int citacoes, char atualizacoes[MAX_ATUALIZACOES], char snippet[MAX_SNIPPET]){
+        Record(int id, char titulo[TITULO_SIZE], int ano, char autores[AUTORES_SIZE], int citacoes, char atualizacoes[ATUALIZACOES_SIZE], char snippet[SNIPPET_SIZE]){
             
             this->id = id;
             this->ano = ano;
             this->citacoes = citacoes;
 
-            memcpy(this->titulo, titulo, MAX_TITULO);
-            memcpy(this->autores, autores, MAX_AUTORES);
-            memcpy(this->atualizacoes, atualizacoes, MAX_ATUALIZACOES);
-            memcpy(this->snippet, snippet, MAX_SNIPPET);
+            memcpy(this->titulo, titulo, TITULO_SIZE);
+            memcpy(this->autores, autores, AUTORES_SIZE);
+            memcpy(this->atualizacoes, atualizacoes, ATUALIZACOES_SIZE);
+            memcpy(this->snippet, snippet, SNIPPET_SIZE);
 
         };
 
