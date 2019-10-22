@@ -44,16 +44,4 @@ class Record{
             cout << endl;
         };
 };
-
-// void print_record(Record record){
-
-//     cout << "Id: " << record.id << endl;
-//     cout << "Titulo: " << record.titulo << endl;
-//     cout << "Ano: " << record.ano << endl;
-//     cout << "Autores: " << record.autores << endl;
-//     cout << "Citações: " << record.citacoes << endl;
-//     cout << "Atualizações: " << record.atualizacoes << endl;
-//     cout << "Snippet: " << record.snippet << endl;
-//     cout << endl;
-// }
 #endif
