@@ -3,7 +3,7 @@
 
 #define MAX_TITULO 300
 #define MAX_AUTORES 150
-#define MAX_ATUALIZACOES 19
+#define MAX_ATUALIZACOES 20
 #define MAX_SNIPPET 1024
 
 #include <iostream>
@@ -31,6 +31,17 @@ class Record{
             memcpy(this->atualizacoes, atualizacoes, MAX_ATUALIZACOES);
             memcpy(this->snippet, snippet, MAX_SNIPPET);
 
+        };
+
+        void print(){
+            cout << "Id: " << id << endl;
+            cout << "Titulo: " << titulo << endl;
+            cout << "Ano: " << ano << endl;
+            cout << "Autores: " << autores << endl;
+            cout << "Citações: " << citacoes << endl;
+            cout << "Atualizações: " << atualizacoes << endl;
+            cout << "Snippet: " << snippet << endl;
+            cout << endl;
         };
 };
 
