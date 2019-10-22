@@ -8,6 +8,9 @@
 
 class Record{
     public:
+        Record(int id, char titulo[MAX_TITULO], int ano, char autores[MAX_AUTORES], int citacoes, char atualizacoes[MAX_ATUALIZACOES], char snippet[MAX_SNIPPET]);
+        Record();
+        
         int id;
         char titulo[MAX_TITULO];
         int ano;
@@ -15,6 +18,9 @@ class Record{
         int citacoes;
         char atualizacoes[MAX_ATUALIZACOES];  //XX-XX-XXXX XX:XX:XX
         char snippet[MAX_SNIPPET];
+
 };
+
+void print_record(Record record);
 
 #endif
