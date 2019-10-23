@@ -33,6 +33,8 @@ Record setRecord(vector<string> row){
     }
 }
 
+
+
 void read_file(){
     fstream fpointer;
 
@@ -42,37 +44,40 @@ void read_file(){
         cout<<"ERROR CANT OPEN THE FILE"<<endl;
     }
 
-    vector<Record> vet;
-
     while (!fpointer.eof()){    //Haven't reached end-of-file
 
         vector<string> row;
-        string line, attribute, temp;
+        string word, nextWord, temp;
         
-        while (getline(fpointer, line)){
+        while (getline(fpointer, word)){
             row.clear();
-            stringstream s(line);
+            stringstream s(word);
 
-            if (line.find(';')){
-                while (getline(getline(s, temp, '"'), attribute, '"')){     //Remove "" of attributes
+            while (getline(s, word, '"')){
+                // cout <<"word " << word << endl;
 
-                    if(attribute == ""){
-                        getline(getline(s, temp, '"'), attribute, '"');
-                        cout << "att: " << attribute << endl; 
-                    }
-                    if(temp == ";;"){
-                        row.push_back("0");      //Assign null value to null attribute
-                        row.push_back(attribute);   //Assign next value to next attribute
-                    }else{
-                        row.push_back(attribute);
-                    }
-                }    
-                getline(s,temp,'N');
-                if(temp==";NULL"){       //Assign null if attribute has NULL in line
+                if (word.compare(";NULL")== 0){
+                    // cout << "word null " << word << endl;
+                    // cout << "temp(data) null " << temp << endl;
+                    row.push_back(temp);
                     row.push_back("0");
-                }   
-            }
+                    // cout << "word depois null " << word << endl;
+                }
 
+                if(word != ";" && word.size() != 0 && word != ";;"){
+                   temp.append(word);
+                }else if(word == ";"){
+                    cout << "temp final " << temp << endl;
+                    row.push_back(temp);   //Assign next value to next attribute
+                    temp = "";
+                }else if(word == ";;"){
+                    row.push_back("0");
+                    temp = "";
+                }
+                // cout << "word " << word << endl;
+            }   
+                cout << endl;
+            
             // cout << "Id: " << row[0] << endl;
             // cout << "Titulo: " << row[1] << endl;
             // cout << "Ano: " << row[2] << endl;
