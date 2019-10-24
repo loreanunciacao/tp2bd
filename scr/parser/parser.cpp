@@ -7,18 +7,18 @@
 #include "../structures/record.hpp"
 
 using namespace std;
-#define FILE_PATH "../arquivo.csv" //Path related to main.cpp
+#define FILE_PATH "../artigo.csv" //Path related to main.cpp
 
 Record* setRecord(vector<string> row){
     try{
-        cout << "Id: " << row[0] << endl;
-        cout << "Titulo: " << row[1] << endl;
-        cout << "Ano: " << row[2] << endl;
-        cout << "Autores: " << row[3] << endl;
-        cout << "Citações: " << row[4] << endl;
-        cout << "Atualizações: " << row[5] << endl;
-        cout << "Snippet: " << row[6] << endl;
-        cout << endl;
+        // cout << "Id: " << row[0] << endl;
+        // cout << "Titulo: " << row[1] << endl;
+        // cout << "Ano: " << row[2] << endl;
+        // cout << "Autores: " << row[3] << endl;
+        // cout << "Citações: " << row[4] << endl;
+        // cout << "Atualizações: " << row[5] << endl;
+        // cout << "Snippet: " << row[6] << endl;
+        // cout << endl;
 
         int idCurrent = stoi(row[0]);
         char tituloCurrent[TITULO_SIZE];
@@ -52,30 +52,39 @@ Record* read_line(fstream& fpointer){
     stringstream s(word);
     while (getline(s, word, '"')){
         // cout << "word " << word << endl;
-        if (word.compare(";NULL")== 0){         //Treats NULL exception
+        // cout << "comparacao " << word.compare(";NULL") << endl;
+        if (word.compare(";NULL")== 1 || word.compare(";NULL")== 0){         //Treats NULL exception
+            // cout<< "a" << endl;
             // cout << "word " << word << endl;
-            // cout << "temp antes " << temp << endl;
+            // cout << "temp " << temp << endl;
             row.push_back(temp);
             temp = "0";
             // cout << "temp depois " << temp << endl;
         }else if(word != ";" && word.size() != 0 && word != ";;"){          //Treats "" in title and normal input
+            // cout<< "b" << endl;
             temp.append(word);
         }else if(word == ";"){          //Add the word 
+            // cout<< "c" << endl;
             row.push_back(temp);   
             temp = "";
         }else if(word == ";;"){         //Treats ;; exception
+            // cout<< "d" << endl;
             row.push_back(temp);
             row.push_back("0");
             temp = "";
         }
+        // cout<< "foi" << endl;
     }   
     // Add snippet to row (when snippet is NULL and NOT NULL)
     row.push_back(temp);
 
-    if(row[0]=="12"){
-        row[5] = "2012-12-31 23:00:00";
-        row[6] = "0";
-    }
+    //Treatting (badly) the 12 record error
+    // if(row[0]=="12"){
+
+    //     row.pop_back();
+    //     row.push_back("2012-12-31 23:00:00");
+    //     row.push_back("0");
+    // }
         
     // cout << "Id: " << row[0] << endl;
     // cout << "Titulo: " << row[1] << endl;
@@ -86,7 +95,8 @@ Record* read_line(fstream& fpointer){
     // cout << "Snippet: " << row[6] << endl;
     // cout << endl;
     
-    return setRecord(row);     
+    Record* record = setRecord(row);
+    return record;     
 }
 
 void read_file(){
@@ -100,7 +110,7 @@ void read_file(){
     while (!fpointer.eof()){    //Haven't reached end-of-file
         Record* record = read_line(fpointer);
         counter++;
-        // cout << counter << " records" << endl;
+        cout << counter << " records" << endl;
         // (record)->print();
     }
     cout << "TOTAL: "<< counter << " records" << endl;
