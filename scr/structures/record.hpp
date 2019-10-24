@@ -20,6 +20,7 @@ class Record{
         char atualizacoes[ATUALIZACOES_SIZE];  //XX-XX-XXXX XX:XX:XX
         char snippet[SNIPPET_SIZE];
 
+        Record(){};
         Record(int id, char titulo[TITULO_SIZE], int ano, char autores[AUTORES_SIZE], int citacoes, char atualizacoes[ATUALIZACOES_SIZE], char snippet[SNIPPET_SIZE]){
             
             this->id = id;
@@ -32,6 +33,8 @@ class Record{
             memcpy(this->snippet, snippet, SNIPPET_SIZE);
 
         };
+
+        ~Record(){};
 
         void print(){
             cout << "Id: " << id << endl;
