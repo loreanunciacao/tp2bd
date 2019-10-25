@@ -1,3 +1,6 @@
 "211971";"A security vulnerability of Java Card on array access in financial system.";"2013";"Jiang-pei Xu|Li-ji Wu|Xiang-jun Yang|Yu-zhong Wang|Xiang-min Zhang";"0";"2012-12-31 23:00:00";NULL
 "211972";"An optimal back-off parameters study for multi-channel MAC protocols in VANETs.";"2013";"Lun Tang|Chen-meng Wang|Qianbin Chen|Pu Gong";"0";"2012-12-31 23:00:00";NULL
 "211973";"Multicast grooming protection algorithm in green optical WDM networks.";"2013";"Cunqian Yu|Peipei Jiang|Lijiao Zhu|Yejun Liu|Lei Guo 0005";"0";"2012-12-31 23:00:00";NULL
+"368004";"Edge Finding Filtering Algorithm for Discrete Cumulative Resources in <i>O</i>(<i>kn</i> log <i>n</i>){mathcal O}(kn {
+m log} n).";"2009";"Petr Vil&iacute;m";"0";"2012-12-31 23:00:00";NULL
+"556";"Concurrent Inference Graphs.";"2013";"Daniel R. Schlegel";"0";"2016-06-18 13:53:36";"Concurrent Inference Graphs. DR Schlegel - AAAI, 2013 - danielschlegel.org. Since at least the early 1980s there has been an effort to utilize multiple processors for  logical reasoning. Prior to the rise of the multi-core desktop computer, this often meant  parallel algorithms on specialized hardware. Parallel logic programming systems  .."
