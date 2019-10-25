@@ -27,14 +27,12 @@ class Record{
             this->ano = ano;
             this->citacoes = citacoes;
 
-            memcpy(this->titulo, titulo, TITULO_SIZE);
-            memcpy(this->autores, autores, AUTORES_SIZE);
-            memcpy(this->atualizacoes, atualizacoes, ATUALIZACOES_SIZE);
-            memcpy(this->snippet, snippet, SNIPPET_SIZE);
+            strcpy(this->titulo, titulo);
+            strcpy(this->autores, autores);
+            strcpy(this->atualizacoes, atualizacoes);
+            strcpy(this->snippet, snippet);
 
         };
-
-        ~Record(){};
 
         void print(){
             cout << "Id: " << id << endl;

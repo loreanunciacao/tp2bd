@@ -9,71 +9,38 @@
 using namespace std;
 #define FILE_PATH "../artigo.csv" //Path related to main.cpp
 
-Record setRecord(vector<string> row){
-    try{
-        int idCurrent = stoi(row[0]);
-        char tituloCurrent[TITULO_SIZE];
-        int anoCurrent = stoi(row[2]);
-        char autoresCurrent[AUTORES_SIZE];
-        int citacoesCurrent = stoi(row[4]);
-        char atualizacoesCurrent[ATUALIZACOES_SIZE];  
-        char snippetCurrent[SNIPPET_SIZE];
-
-        strcpy(tituloCurrent, row[1].c_str());
-        strcpy(autoresCurrent, row[3].c_str());
-        strcpy(atualizacoesCurrent, row[5].c_str());
-        strcpy(snippetCurrent, row[6].c_str());
-
-        Record record = Record(idCurrent, tituloCurrent, anoCurrent, autoresCurrent, citacoesCurrent, atualizacoesCurrent, snippetCurrent);
-        return record;
-
-    }catch(char *e){
-        throw e;
-    }
+void copyToString(string str, char * attribute){
+    str.copy(attribute, str.size() + 1);
+    attribute[str.size()] = '\0';
 }
 
-Record read_line(fstream& fpointer){
-    vector<string> row;
-    string word, line, temp;
+void setRecord(vector<string> &row){
 
-    getline(fpointer, line);
-    row.clear();
-    stringstream s(line);
+    int idCurrent = stoi(row[0]);
+    char tituloCurrent[TITULO_SIZE];
+    int anoCurrent = stoi(row[2]);
+    char autoresCurrent[AUTORES_SIZE];
+    int citacoesCurrent = stoi(row[4]);
+    char atualizacoesCurrent[ATUALIZACOES_SIZE];  
+    char snippetCurrent[SNIPPET_SIZE];
 
-    while (getline(s, word, '"')){
-        // cout << word << endl;
-        if ((word.compare(";NULL") == 0) || (word.compare(";NULL") == 1 && word.at(0) == ';')){         //Treats NULL exception
-            row.push_back(temp);
-            temp = "0";
-        }else if(word != ";" && word.size() != 0 && word != ";;"){          //Treats "" in title and normal input
-            temp.append(word);
-        }else if(word == ";"){          //Add the word
-            row.push_back(temp);   
-            temp = "";
-        }else if(word == ";;"){         //Treats ;; exception
-            row.push_back(temp);
-            row.push_back("0");
-            temp = "";
-        }
-    }   
-    // Add snippet to row (when snippet is NULL and NOT NULL)
-    row.push_back(temp);
+    copyToString(row[1].c_str(), tituloCurrent);
+    copyToString(row[3].c_str(), autoresCurrent);
+    copyToString(row[5].c_str(), atualizacoesCurrent);
+
+    //Trim the snippets bigger than 1024
+    if(row.at(6).length() > 1023){
+        row.at(6) = row.at(6).substr(0,1022);
+    }
+    copyToString(row[6].c_str(), snippetCurrent);
     
-    // if(row[0] == "292926"){
-    //     cout << "Id: " << row[0] << endl;
-    //     cout << "Titulo: " << row[1] << endl;
-    //     cout << "Ano: " << row[2] << endl;
-    //     cout << "Autores: " << row[3] << endl;
-    //     cout << "Citações: " << row[4] << endl;
-    //     cout << "Atualizações: " << row[5] << endl;
-    //     cout << "Snippet: " << row[6] << endl;
-    //     cout << endl;
-    // }
-        
-    
-    Record record = setRecord(row);
-    // cout << "Id: " << record.id << endl;
-    return record;     
+
+    Record record(idCurrent, tituloCurrent, anoCurrent, autoresCurrent, citacoesCurrent, atualizacoesCurrent, snippetCurrent);
+
+}
+
+void read_line(fstream& fpointer){
+      
 }
 
 void read_file(){
@@ -85,12 +52,45 @@ void read_file(){
         cout<<"ERROR CANT OPEN THE FILE"<<endl;
     }
 
+    vector<string> row;
+    string word, line, temp;
     while (!fpointer.eof()){    //Haven't reached end-of-file
-        Record record = read_line(fpointer);
+
+        getline(fpointer, line);
+        stringstream s(line);
+        while (getline(s, word, '"')){
+            // cout << "word" <<word << endl;
+
+            if ((word.compare(";NULL") == 0) || (word.compare(";NULL") == 1 && word.at(0) == ';')){         //Treats NULL exception
+                // cout << "a"<< endl;
+                row.push_back(temp);
+                temp = "0";
+            }else if(word != ";" && word.size() != 0 && word != ";;"){          //Treats "" in title and normal input
+                // cout << "b" << endl;
+                temp.append(word);
+            }else if(word == ";"){          //Add the word
+                // cout << "c" << endl;
+                row.push_back(temp);   
+                temp = "";
+            }else if(word == ";;"){         //Treats ;; exception
+                // cout << "d" << endl;
+                row.push_back(temp);
+                row.push_back("0");
+                temp = "";
+            }
+        }   
+        if(row.size() < 6){
+            continue;
+        }
+        // Add snippet to row (when snippet is NULL and NOT NULL)
+        row.push_back(temp);
+        
+        setRecord(row);
+        row.clear();
+        temp = "";
         counter++;
-        cout << counter << " records" << endl;
+        // cout << counter << " records" << endl;
         
     }
     cout << "TOTAL: "<< counter << " records" << endl;
 }
-

@@ -6,8 +6,9 @@
 #include <string>
 #include "../structures/record.hpp"
 
-Record* read_line(fstream fpointer);
-Record* setRecord(std::vector<std::string> row);
+void copyToString(string str, char * attribute);
+void read_line(fstream fpointer);
+void setRecord(std::vector<std::string> row);
 void read_file();
 
 #endif
