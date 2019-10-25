@@ -34,13 +34,8 @@ void setRecord(vector<string> &row){
     }
     copyToString(row[6].c_str(), snippetCurrent);
     
-
     Record record(idCurrent, tituloCurrent, anoCurrent, autoresCurrent, citacoesCurrent, atualizacoesCurrent, snippetCurrent);
 
-}
-
-void read_line(fstream& fpointer){
-      
 }
 
 void read_file(){
