@@ -19,8 +19,12 @@ class Record{
         int citacoes;
         char atualizacoes[ATUALIZACOES_SIZE];  //XX-XX-XXXX XX:XX:XX
         char snippet[SNIPPET_SIZE];
+        bool empty;
 
-        Record(){};
+        Record(){
+            empty = true;
+        };
+        
         Record(int id, char titulo[TITULO_SIZE], int ano, char autores[AUTORES_SIZE], int citacoes, char atualizacoes[ATUALIZACOES_SIZE], char snippet[SNIPPET_SIZE]){
             
             this->id = id;
@@ -31,6 +35,7 @@ class Record{
             strcpy(this->autores, autores);
             strcpy(this->atualizacoes, atualizacoes);
             strcpy(this->snippet, snippet);
+            empty = false;
 
         };
 

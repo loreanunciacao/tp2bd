@@ -5,6 +5,7 @@
 #include <cstring>
 #include <sstream>
 #include "../structures/record.hpp"
+#include "../structures/block.hpp"
 
 using namespace std;
 #define FILE_PATH "../artigo.csv" //Path related to main.cpp
@@ -35,10 +36,9 @@ void setRecord(vector<string> &row){
     copyToString(row[6].c_str(), snippetCurrent);
     
     Record record(idCurrent, tituloCurrent, anoCurrent, autoresCurrent, citacoesCurrent, atualizacoesCurrent, snippetCurrent);
-
 }
 
-void read_file(){
+void readFile(){
     fstream fpointer;
     fpointer.open(FILE_PATH, ios::in);
     int counter = 0;
@@ -46,7 +46,7 @@ void read_file(){
     if(!fpointer.is_open()){
         cout<<"ERROR CANT OPEN THE FILE"<<endl;
     }
-
+    cout << "[PARSER] Lendo o arquivo e gerando os registros ..." << endl;
     vector<string> row;
     string word, line, temp;
     while (!fpointer.eof()){    //Haven't reached end-of-file
@@ -87,5 +87,6 @@ void read_file(){
         // cout << counter << " records" << endl;
         
     }
-    cout << "TOTAL: "<< counter << " records" << endl;
+    cout << "[PARSER] TOTAL: "<< counter << " records" << endl;
+    cout << "[PARSER] Leitura do arquivo finalizada" << endl;
 }

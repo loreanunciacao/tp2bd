@@ -8,6 +8,6 @@
 
 void copyToString(string str, char * attribute);
 void setRecord(std::vector<std::string> row);
-void read_file();
+void readFile();
 
 #endif
