@@ -8,7 +8,6 @@
 #include "../structures/block.hpp"
 
 using namespace std;
-#define FILE_PATH "../artigo.csv" //Path related to main.cpp
 
 void copyToString(string str, char * attribute){
     str.copy(attribute, str.size() + 1);
@@ -38,13 +37,14 @@ void setRecord(vector<string> &row){
     Record record(idCurrent, tituloCurrent, anoCurrent, autoresCurrent, citacoesCurrent, atualizacoesCurrent, snippetCurrent);
 }
 
-void readFile(){
+void readFile(char const* fileName){
     fstream fpointer;
-    fpointer.open(FILE_PATH, ios::in);
+    fpointer.open(fileName, ios::in);
     int counter = 0;
 
     if(!fpointer.is_open()){
         cout<<"ERROR CANT OPEN THE FILE"<<endl;
+        return;
     }
     cout << "[PARSER] Lendo o arquivo e gerando os registros ..." << endl;
     vector<string> row;
