@@ -6,6 +6,7 @@
 #include <sstream>
 #include "../structures/record.hpp"
 #include "../structures/block.hpp"
+#include "../support/hashFile.hpp"
 
 using namespace std;
 
@@ -35,6 +36,7 @@ void setRecord(vector<string> &row){
     copyToString(row[6].c_str(), snippetCurrent);
     
     Record record(idCurrent, tituloCurrent, anoCurrent, autoresCurrent, citacoesCurrent, atualizacoesCurrent, snippetCurrent);
+    insertRecord(record);
 }
 
 void readFile(char const* fileName){
@@ -46,9 +48,11 @@ void readFile(char const* fileName){
         cout<<"ERROR CANT OPEN THE FILE"<<endl;
         return;
     }
-    cout << "[PARSER] Lendo o arquivo e gerando os registros ..." << endl;
     vector<string> row;
     string word, line, temp;
+
+    cout << "[PARSER] Lendo o arquivo e gerando os registros ..." << endl;
+    cout << "[HASH] Inserindo no arquivo hash ..." << endl;
     while (!fpointer.eof()){    //Haven't reached end-of-file
 
         getline(fpointer, line);
