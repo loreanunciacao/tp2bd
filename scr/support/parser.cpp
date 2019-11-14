@@ -93,4 +93,5 @@ void readFile(char const* fileName){
     }
     cout << "[PARSER] TOTAL: "<< counter << " records" << endl;
     cout << "[PARSER] Leitura do arquivo finalizada" << endl;
+    cout << "[HASH] Criação do arquivo hash com base nos registros finalizada" << endl;
 }
